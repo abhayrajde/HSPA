@@ -13,12 +13,14 @@ export class PropertyListComponent implements OnInit{
     constructor(private housingService: HousingService) {}
     
     ngOnInit(): void {
-        this.housingService.getAllProperties().subscribe(
-            data => {
-                this.properties = data
-            }, error => {
-                console.log(error)
+        this.housingService.getAllProperties().subscribe({
+            next: (data: Object) => {
+              this.properties = data;
+              console.log(this.properties);
+            },
+            error: (error: any) => {
+              console.log(error);
             }
-        );  
+          });  
     }
 }
