@@ -11,29 +11,22 @@ export class HousingService {
     constructor(private http: HttpClient) { }
 
     getAllProperties(): Observable<IProperty[]> {
+        return this.http.get("data/properties.json").pipe(
+            map(data => {
+                const propertiesArray: Array<IProperty> = data as IProperty[];
+                return propertiesArray
+            })
+        );
         // return this.http.get("data/properties.json").pipe(
         //     map(data => {
-        //         const propArray: Array<IProperty> = [];
-        //         for (const property in data) {
-        //             propArray.push(data[property])
-        //         }
         //         const propertiesArray: Array<IProperty> = [];
         //         for (var i of Object.values(data)){
         //             propertiesArray.push(i)
         //         }
+        //         //console.log("I am at prop array");
+        //         //console.log(typeof(propertiesArray));
         //         return propertiesArray
         //     })
         // );
-        return this.http.get("data/properties.json").pipe(
-            map(data => {
-                const propertiesArray: Array<IProperty> = [];
-                for (var i of Object.values(data)){
-                    propertiesArray.push(i)
-                }
-                //console.log("I am at prop array");
-                //console.log(typeof(propertiesArray));
-                return propertiesArray
-            })
-        );
     }
 }
