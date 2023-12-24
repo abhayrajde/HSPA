@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   {path: '', component: PropertyListComponent},
+  {path: 'rent-property', component: PropertyListComponent},
   {path: 'add-property', component: AddPropertyComponent}
 ]
 @NgModule({
