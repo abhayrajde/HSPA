@@ -1,24 +1,28 @@
 [
     {
         "Id": 1,
+        "SellRent": 1,
         "Type": "Home",
         "Name": "Deerfield",
         "Price": 12000
     },
     {
         "Id": 2,
+        "SellRent": 2,
         "Type": "Home",
         "Name": "Brisco",
         "Price": 12000
     },
     {
         "Id": 3,
+        "SellRent": 1,
         "Type": "Home",
         "Name": "Trento",
         "Price": 12000
     },
     {
         "Id": 4,
+        "SellRent": 2,
         "Type": "Home",
         "Name": "Meadow Park",
         "Price": 12000

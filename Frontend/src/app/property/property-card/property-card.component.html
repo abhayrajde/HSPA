@@ -1,6 +1,7 @@
 <div class="card shadow-lg">
     <div class="card-img-wrapper">
-        <img class="card-img-top p-3" src="./assets/images/house_default.webp">
+        <img *ngIf="property.Image" class="card-img-top p-3" src="./assets/images/{{property.Image}}">
+        <img *ngIf="!property.Image" class="card-img-top p-3" src="./assets/images/house_default.webp">
         <ul class="list-inline text-center member-icons animate">
             <li class="list-inline-item">
                 <button class="btn btn-primary ">
