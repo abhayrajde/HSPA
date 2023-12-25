@@ -6,15 +6,17 @@ import { AppComponent } from './app.component';
 import { PropertyCardComponent } from './property/property-card/property-card.component';
 import { PropertyListComponent } from './property/property-list/property-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, withFetch } from '@angular/common/http';
 import { HousingService } from './services/housing.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
 import { RouterModule, Routes } from '@angular/router';
+import { PropertyDetailsComponent } from './property/property-details/property-details.component';
 
 const appRoutes: Routes = [
   {path: '', component: PropertyListComponent},
   {path: 'rent-property', component: PropertyListComponent},
-  {path: 'add-property', component: AddPropertyComponent}
+  {path: 'add-property', component: AddPropertyComponent},
+  {path: 'property-details/:id', component: PropertyDetailsComponent}
 ]
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ const appRoutes: Routes = [
     PropertyCardComponent,
     PropertyListComponent,
     NavBarComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    PropertyDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     HousingService,
-    provideClientHydration()
+    provideClientHydration(),
   ],
   bootstrap: [AppComponent]
 })
