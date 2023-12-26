@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
     styleUrl: './add-property.component.css'
 })
 export class AddPropertyComponent implements OnInit{
+    @ViewChild('Form') addPropertyForm!: NgForm;
     constructor(private route: Router) {
 
     }
@@ -18,9 +19,9 @@ export class AddPropertyComponent implements OnInit{
         this.route.navigate(['/']);
     }
 
-    onSubmit(Form: NgForm) {
+    onSubmit() {
         console.log("Form submitted!");
-        console.log(Form);
+        console.log(this.addPropertyForm);
         
         
     }
