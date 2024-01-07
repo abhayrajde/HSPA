@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-user-register',
@@ -8,16 +8,20 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 })
 export class UserRegisterComponent implements OnInit {
     registrationForm!: FormGroup;
-    constructor() {}
+    constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {
-        this.registrationForm = new FormGroup({
-            userName: new FormControl("Test",Validators.required),
-            email: new FormControl("", [Validators.required, Validators.email]),
-            password: new FormControl("",[Validators.required, Validators.minLength(8)]),
-            confirmPassword: new FormControl("",[Validators.required]),
-            mobile: new FormControl("",[Validators.required, Validators.maxLength(10)]),
-        }, { validators: this.passwordMatchingValidator});
+        this.createRegistrationForm();
+    }
+
+    createRegistrationForm() {
+        this.registrationForm = this.fb.group({
+            userName: ["Test1",Validators.required],
+            email: ["", [Validators.required, Validators.email]],
+            password: ["",[Validators.required, Validators.minLength(8)]],
+            confirmPassword: ["",[Validators.required]],
+            mobile: ["",[Validators.required, Validators.maxLength(10)]],
+        }, { validators: this.passwordMatchingValidator });
     }
 
     passwordMatchingValidator(control: AbstractControl): ValidationErrors | null {
@@ -47,7 +51,7 @@ export class UserRegisterComponent implements OnInit {
         return this.registrationForm.get('mobile') as FormControl;
     }
     // -----------------------------------------------------------------------------
-    
+
     onSubmit() {
         console.log(this.registrationForm);
         
