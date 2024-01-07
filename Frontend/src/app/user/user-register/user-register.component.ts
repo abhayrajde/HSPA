@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { User } from '../../model/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-user-register',
@@ -8,7 +10,9 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 })
 export class UserRegisterComponent implements OnInit {
     registrationForm!: FormGroup;
-    constructor(private fb: FormBuilder) {}
+    user!: User;
+    userSubmitted: boolean = false;
+    constructor(private fb: FormBuilder,private userService: UserService) {}
 
     ngOnInit(): void {
         this.createRegistrationForm();
@@ -16,7 +20,7 @@ export class UserRegisterComponent implements OnInit {
 
     createRegistrationForm() {
         this.registrationForm = this.fb.group({
-            userName: ["Test1",Validators.required],
+            userName: ["",Validators.required],
             email: ["", [Validators.required, Validators.email]],
             password: ["",[Validators.required, Validators.minLength(8)]],
             confirmPassword: ["",[Validators.required]],
@@ -54,6 +58,21 @@ export class UserRegisterComponent implements OnInit {
 
     onSubmit() {
         console.log(this.registrationForm);
-        
+        this.userSubmitted = true;
+        if(this.registrationForm.valid) {
+            // this.user = Object.assign(this.user, this.registrationForm.value);
+            this.userService.addUser(this.userData());
+            this.registrationForm.reset();
+            this.userSubmitted = false;
+        }
+    }    
+
+    userData(): User {
+        return this.user = {
+            userName: this.userName.value,
+            email: this.email.value,
+            password: this.password.value,
+            mobile: this.mobile.value,
+        }
     }
 }
