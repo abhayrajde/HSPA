@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
 
@@ -12,7 +13,9 @@ export class UserRegisterComponent implements OnInit {
     registrationForm!: FormGroup;
     user!: User;
     userSubmitted: boolean = false;
-    constructor(private fb: FormBuilder,private userService: UserService) {}
+    constructor(private fb: FormBuilder,
+        private userService: UserService,
+        private toastr: ToastrService) {}
 
     ngOnInit(): void {
         this.createRegistrationForm();
@@ -64,6 +67,9 @@ export class UserRegisterComponent implements OnInit {
             this.userService.addUser(this.userData());
             this.registrationForm.reset();
             this.userSubmitted = false;
+            this.toastr.success('You are successfully register.', 'Congratulations');
+        } else {
+            this.toastr.error('Kindly provide the required fields.', 'Failure');
         }
     }    
 
